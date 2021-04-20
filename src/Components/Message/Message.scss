@@ -104,12 +104,14 @@
         font-weight: 500;
         opacity: 0.5;
         font-size: 12px;
+
       }
       &-progress {
         position: absolute;
         left: 0;
         top: 0;
         background-color: #418fff;
+        transition: all 0.35s ease-out;
       }
     }
   }

@@ -5,6 +5,8 @@ import './Message.scss';
 import propTypes from 'prop-types';
 import classNames from 'classnames';
 
+import { convertCurrentTime } from 'Utils/Helpers'
+
 import waveSvg from 'Assets/img/wave.svg';
 import playSvg from 'Assets/img/play.svg';
 import pauseSvg from 'Assets/img/pause.svg';
@@ -25,10 +27,12 @@ const Message = ({
                  }) => {
 
     const [isPlaying, setIsPlaying] = useState(false);
+    const [progress, setProgress] = useState(false);
+    const [currentTime, setCurrentTime] = useState(0);
     const audioElem = useRef(null)
 
     const togglePlay = () => {
-        audioElem.current.volume = '0.5';
+
         if(!isPlaying){
             audioElem.current.play();
         } else {
@@ -37,27 +41,35 @@ const Message = ({
     };
 
     useEffect(() => {
+        audioElem.current.volume = '0.5';
         audioElem.current.addEventListener(
             'playing',
             () => {
-                setIsPlaying(true)
+                setIsPlaying(true);
             },
             false
         );
         audioElem.current.addEventListener(
             'ended',
             () => {
-                setIsPlaying(false)
+                setIsPlaying(false);
+                setProgress(0);
+                setCurrentTime(0);
             },
             false
         );
         audioElem.current.addEventListener(
             'pause',
             () => {
-                setIsPlaying(false)
+                setIsPlaying(false);
             },
             false
         );
+        audioElem.current.addEventListener('timeupdate', () => {
+            const duration = audioElem.current && audioElem.current.duration || 0
+            setCurrentTime(audioElem.current.currentTime);
+            setProgress((audioElem.current.currentTime / duration) * 100);
+        });
         }, [])
 
 
@@ -90,7 +102,7 @@ const Message = ({
                                     audio && <div className="message__audio">
                                         <audio ref={audioElem} src={audio} preload="auto"/>
                                         <div className="message__audio-progress"
-                                             style={{width: "40%", height: '100%'}}/>
+                                             style={{width: progress + "%", height: '100%'}}/>
                                         <div className="message__audio-info">
                                             <div className="message__audio-btn">
                                                 <button onClick={togglePlay}>
@@ -102,7 +114,9 @@ const Message = ({
                                                 </button>
                                             </div>
                                             <div className="message__audio-wave"><img src={waveSvg} alt="Wave"/></div>
-                                            <div className="message__audio-duration">00:19</div>
+                                            <div className="message__audio-duration">
+                                                {convertCurrentTime(currentTime)}
+                                            </div>
                                         </div>
 
                                     </div>
