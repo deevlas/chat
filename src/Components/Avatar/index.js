@@ -14,12 +14,8 @@ const Avatar = ({user}) => {
     } else {
         const {color, colorLighten} = generateAvatarFromHash(user._id);
         const firstChar = user.fullname[0].toUpperCase();
-        return <div style={{
-            background: `linear-gradient(105deg, ${color} 0%, ${colorLighten} 96.52%)`
-        }}
-                    className="avatar avatar--symbol">{firstChar}</div>
-    }
-
+        return <div style={{background: `linear-gradient(135deg, ${color} 10%, ${colorLighten} 96.52%)`}}
+                    className="avatar avatar--symbol">{firstChar} </div>}
 };
 
 

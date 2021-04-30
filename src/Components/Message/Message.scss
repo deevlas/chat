@@ -7,7 +7,7 @@
   &__content {
     display: flex;
     max-width: 440px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     position: relative;
   }
 
@@ -133,7 +133,7 @@
     }
 
     #{$self}__info {
-      text-align: right;
+      text-align: center;
     }
 
     #{$self}__bubble {
