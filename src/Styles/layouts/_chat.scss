@@ -36,21 +36,6 @@
           margin-right: 5px;
         }
       }
-
-
-
-    }
-
-    &-search {
-      padding: 0 20px 20px 20px;
-
-      .ant-btn-primary {
-        background-color: #3674FF;
-
-        &:hover {
-          opacity: 0.9;
-        }
-      }
     }
 
     &-dialogs {
@@ -78,6 +63,13 @@
   &__dialog {
     flex: 1;
     position: relative;
+
+    .ant-empty {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
 
     &-header {
       display: flex;

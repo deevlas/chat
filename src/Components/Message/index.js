@@ -11,7 +11,7 @@ import waveSvg from 'Assets/img/wave.svg';
 import playSvg from 'Assets/img/play.svg';
 import pauseSvg from 'Assets/img/pause.svg';
 
-import {Time, iconReaded} from '../';
+import {Time, IconReaded} from 'Components';
 
 
 const MessageAudio = ({audio}) => {
@@ -107,7 +107,7 @@ const Message = ({
             "message--is-audio": audio
         })}>
             <div className="message__content">
-                <iconReaded isMe={isMe} isReaded={isReaded}/>
+                <IconReaded isMe={isMe} isReaded={isReaded}/>
 
                 <div className="message__avatar">
                     <img src={avatar} alt={`Avatar ${user.fullName}`}/>
@@ -130,8 +130,9 @@ const Message = ({
 
                         {attachments && (
                             <div className='message__attachments'>
-                                {attachments.map(item => (
-                                    <div className="message__attachments-item">
+                                {attachments.map((item, index) => (
+
+                                    <div key={index} className="message__attachments-item">
                                         <img src={item.url} alt={item.filename}/>
                                     </div>
                                 ))}

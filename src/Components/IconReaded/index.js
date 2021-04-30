@@ -13,7 +13,7 @@ const IconReaded = ({isMe, isReaded}) =>
                 src={noCheckedSvg}
                 alt="No readed icon"
             />
-        )))
+        ))) || null;
 
 IconReaded.propTypes = {
     isMe: propTypes.bool,
